@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ContentVersion</key>
+	<string>1.0</string>
+	<key>Name</key>
+	<string>Lineare Funktionen</string>
+	<key>Pages</key>
+	<array>
+		<string>Einleitung Playground.playgroundpage</string>
+		<string>Koordinatensystem.playgroundpage</string>
+		<string>Gleichung einer linearen Funktion.playgroundpage</string>
+		<string>Steigung und y-Achsenabschnitt.playgroundpage</string>
+		<string>Fünfte Seite.playgroundpage</string>
+	</array>
+	<key>Version</key>
+	<string>1.0</string>
+</dict>
+</plist>
