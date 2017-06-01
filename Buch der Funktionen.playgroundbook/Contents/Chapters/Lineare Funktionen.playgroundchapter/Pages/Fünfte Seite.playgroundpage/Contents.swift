@@ -4,8 +4,6 @@ import PlaygroundSupport
 //#-end-hidden-code
 
 //: Still work to do...
-let point3 = CGPoint(x: 300, y: 200)
-
 //#-hidden-code
 
 
@@ -18,7 +16,7 @@ let point3 = CGPoint(x: 300, y: 200)
  let midY = transposedFrame.midY
  let point1 = CGPoint(x: 0, y: 0)
  let point2 = CGPoint(x: 200, y: 0)
- //let point3 = CGPoint(x: 300, y: 200)
+ let point3 = CGPoint(x: 432, y: 628)
  
  //var breite = size.width
  
@@ -29,8 +27,8 @@ let point3 = CGPoint(x: 300, y: 200)
  path.addLine(to: point3)
  path.close()
  
- let pathview = UIView(frame: CGRect(x: 0, y: 0, width: 400, height: 400))
- pathview.backgroundColor = UIColor.blue
+ let pathview = UIView(frame: CGRect(x: 0, y: 0, width: 432, height: 628))
+ pathview.backgroundColor = UIColor.lightGray
  
  let shapeLayer = CAShapeLayer()
  shapeLayer.path = path.cgPath
@@ -47,18 +45,22 @@ class ViewController: UIViewController {
         
         let view = UIView()
         view.backgroundColor = UIColor.white
-        
+        view.frame.width
         view.addSubview(pathview)
         
+        UIScreen.main.bounds.width
+        UIScreen.main.bounds.height
+        
+        
         self.view = view
+        view.frame
     }
 }
 
 PlaygroundPage.current.liveView = ViewController()
 
-func /*#-editable-code*/ <#funcName#> /*#-end-editable-code*/() {
+/*func /*#-editable-code*/ <#funcName#> /*#-end-editable-code*/() {
     print("The user will be prompted to edit <#funcName#>")
     print("This yields a compiler warning in Xcode")
-}
-
+}*/
 //#-end-hidden-code
