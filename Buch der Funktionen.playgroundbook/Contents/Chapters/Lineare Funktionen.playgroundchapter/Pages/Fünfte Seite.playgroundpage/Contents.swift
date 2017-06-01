@@ -4,6 +4,8 @@ import PlaygroundSupport
 //#-end-hidden-code
 
 //: Still work to do...
+let point3 = CGPoint(x: 300, y: 200)
+
 //#-hidden-code
 
 
@@ -16,7 +18,7 @@ import PlaygroundSupport
  let midY = transposedFrame.midY
  let point1 = CGPoint(x: 0, y: 0)
  let point2 = CGPoint(x: 200, y: 0)
- let point3 = CGPoint(x: 20, y: 20)
+ //let point3 = CGPoint(x: 300, y: 200)
  
  //var breite = size.width
  
@@ -27,7 +29,7 @@ import PlaygroundSupport
  path.addLine(to: point3)
  path.close()
  
- let pathview = UIView(frame: CGRect(x: 0, y: 200, width: 200, height: 400))
+ let pathview = UIView(frame: CGRect(x: 0, y: 0, width: 400, height: 400))
  pathview.backgroundColor = UIColor.blue
  
  let shapeLayer = CAShapeLayer()

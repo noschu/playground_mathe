@@ -13,8 +13,6 @@ public func sharedFunction() -> String {
 //// Einleitung Playground
 //: In diesem Playground werden lineare und quadratische Funktionen, insbesondere deren Verschiebung besprochen. Dabei nutzen wir die Möglichkeit die mathematischen Begriffe auch im Kontext von gängien Programmiersprachen zu beschreiben.
 
-PlaygroundPage.current.liveView = ViewController()
-
 //// Koordinatensystem
 //: Zunächst brauchen wir ein Koordinatensystem. Normalerweise zeichnen wir dieses als erstes in unser Heft. Diesmal wollen wir das iPad diese Aufgabe zuweisen. Mit den Befehl ... kannst Du die x-Achse zeichnen. Wie könnte der Befehl für die y-Achse lauten? Probier es mal aus!
 //// Gleichung einer linearen Funktion
@@ -24,6 +22,8 @@ PlaygroundPage.current.liveView = ViewController()
 
 //// Fünfte Seite
 //: Still work to do...
+
+let point3 = CGPoint(x: 300, y: 200)
 
 //#-hidden-code
 
@@ -37,7 +37,7 @@ PlaygroundPage.current.liveView = ViewController()
  let midY = transposedFrame.midY
  let point1 = CGPoint(x: 0, y: 0)
  let point2 = CGPoint(x: 200, y: 0)
- let point3 = CGPoint(x: 20, y: 20)
+ //let point3 = CGPoint(x: 300, y: 200)
  
  //var breite = size.width
  
@@ -48,7 +48,7 @@ PlaygroundPage.current.liveView = ViewController()
  path.addLine(to: point3)
  path.close()
  
- let pathview = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 400))
+ let pathview = UIView(frame: CGRect(x: 0, y: 0, width: 400, height: 400))
  pathview.backgroundColor = UIColor.blue
  
  let shapeLayer = CAShapeLayer()
