@@ -6,33 +6,47 @@ import PlaygroundSupport
 //: Still work to do...
 //#-hidden-code
 
-import UIKit
-import PlaygroundSupport
+
+ var arrowLength: CGFloat = 20.0
+ 
+ var transposedFrame = CGRect.zero
+ 
+ // We need 7 points for our Bezier path
+ let midX = transposedFrame.midX
+ let midY = transposedFrame.midY
+ let point1 = CGPoint(x: 0, y: 0)
+ let point2 = CGPoint(x: 200, y: 0)
+ let point3 = CGPoint(x: 20, y: 20)
+ 
+ //var breite = size.width
+ 
+ // Build our Bezier path
+ let path = UIBezierPath()
+ path.move(to: point1)
+ path.addLine(to: point2)
+ path.addLine(to: point3)
+ path.close()
+ 
+ let pathview = UIView(frame: CGRect(x: 0, y: 200, width: 200, height: 400))
+ pathview.backgroundColor = UIColor.blue
+ 
+ let shapeLayer = CAShapeLayer()
+ shapeLayer.path = path.cgPath
+ shapeLayer.fillColor = UIColor.white.cgColor
+ shapeLayer.fillRule = kCAFillRuleEvenOdd
+ pathview.layer.mask = shapeLayer
+ pathview
 
 print("This code gets executed but isn't visible in the book.")
 
-func createBezierPath() -> UIBezierPath {
-    // Create a path
-    let path = UIBezierPath()
-    
-    // Starting point
-    path.move(to: CGPoint(x:0,y:0) )
-    
-    // Ending point
-    path.addLine(to: CGPoint(x:0, y:5) )
-    
-    return path
-}
-
-let path = createBezierPath()
-
-class ViewController : UIViewController {
+class ViewController: UIViewController {
     
     override func loadView() {
-
-
-let view = UIView()
-view.backgroundColor = UIColor.white
+        
+        let view = UIView()
+        view.backgroundColor = UIColor.white
+        
+        view.addSubview(pathview)
         
         self.view = view
     }
