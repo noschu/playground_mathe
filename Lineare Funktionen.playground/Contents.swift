@@ -94,7 +94,7 @@ let yaxis=UIBezierPath(rect: CGRect(x: 23*432/46, y: 0, width: 1, height: 768))
 
 //drawLine(p1: CGPoint(x:0, y:0), p2: CGPoint(x:0, y:100))
 
- gridview.backgroundColor = UIColor.lightGray
+ gridview.backgroundColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1)
 
 axisview.backgroundColor = UIColor.black
  
