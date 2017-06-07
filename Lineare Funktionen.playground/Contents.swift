@@ -1,5 +1,3 @@
-
-
 import UIKit
 import PlaygroundSupport
 
@@ -7,6 +5,22 @@ import PlaygroundSupport
 public func sharedFunction() -> String {
     return "Hello, world!"
 }
+
+public extension UIView {
+    
+    func bindFrameToSuperviewBounds() {
+        guard let superview = self.superview else {
+            print("Error! `superview` was nil – call `addSubview(view: UIView)` before calling `bindFrameToSuperviewBounds()` to fix this.")
+            return
+        }
+        
+        self.translatesAutoresizingMaskIntoConstraints = false
+        superview.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[subview]-0-|", options: .directionLeadingToTrailing, metrics: nil, views: ["subview": self]))
+        superview.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[subview]-0-|", options: .directionLeadingToTrailing, metrics: nil, views: ["subview": self]))
+    }
+    
+}
+
 
 
 
@@ -40,21 +54,56 @@ public func sharedFunction() -> String {
  //var breite = size.width
  
  // Build our Bezier path
- let path = UIBezierPath()
+
+ /*let path = UIBezierPath()
  path.move(to: point1)
  path.addLine(to: point2)
  path.addLine(to: point3)
- path.close()
+
+path.move(to: CGPoint(x:0 , y:100))
+path.addLine(to: point3)
+path.lineWidth = 2*/
  
- let pathview = UIView(frame: CGRect(x: 0, y: 0, width: 432, height: 628))
- pathview.backgroundColor = UIColor.lightGray
+ let gridview = UIView(frame: CGRect(x: 0, y: 0, width: 432, height:768))
+
+ let axisview = UIView(frame: CGRect(x: 0, y: 0, width: 432, height:768))
+
+
+ //let xGrid = CGRect(x: 432/46, y: 0, width: 1, height: 768)
+
+//xGrid.bounds = xGrid
+//xGrid.position = view.center
+let grid = UIBezierPath()
+for i in 1...46 {
+    grid.append(UIBezierPath(rect: CGRect(x: i*432/46, y: 0, width: 1, height: 768)))
+}
+
+for i in 1...85 {
+    grid.append(UIBezierPath(rect: CGRect(x: 0, y: i*9, width: 768, height: 1)))
+}
+
+let xaxis=UIBezierPath(rect: CGRect(x: 23*432/46, y: 0, width: 1, height: 768))
+let yaxis=UIBezierPath(rect: CGRect(x: 23*432/46, y: 0, width: 1, height: 768))
+
+
+
+
+
+
+
+
+//drawLine(p1: CGPoint(x:0, y:0), p2: CGPoint(x:0, y:100))
+
+ gridview.backgroundColor = UIColor.lightGray
+
+axisview.backgroundColor = UIColor.black
  
  let shapeLayer = CAShapeLayer()
- shapeLayer.path = path.cgPath
- shapeLayer.fillColor = UIColor.white.cgColor
- shapeLayer.fillRule = kCAFillRuleEvenOdd
- pathview.layer.mask = shapeLayer
- pathview
+ shapeLayer.path = grid.cgPath
+ //shapeLayer.fillColor = UIColor.white.cgColor
+ //shapeLayer.fillRule = kCAFillRuleEvenOdd
+ gridview.layer.mask = shapeLayer
+ //gridview
 
 print("This code gets executed but isn't visible in the book.")
 
@@ -65,11 +114,10 @@ class ViewController: UIViewController {
         let view = UIView()
         view.backgroundColor = UIColor.white
         view.frame.width
-        view.addSubview(pathview)
+        view.addSubview(gridview)
         
         UIScreen.main.bounds.width
         UIScreen.main.bounds.height
-        
         
         self.view = view
         view.frame
