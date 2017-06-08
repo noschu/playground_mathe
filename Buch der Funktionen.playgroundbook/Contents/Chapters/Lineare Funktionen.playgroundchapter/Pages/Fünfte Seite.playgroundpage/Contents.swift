@@ -30,23 +30,33 @@ import PlaygroundSupport
 path.move(to: CGPoint(x:0 , y:100))
 path.addLine(to: point3)
 path.lineWidth = 2*/
- 
- let gridview = UIView(frame: CGRect(x: 0, y: 0, width: 432, height:768))
+let sheetwidth = 432
+let sheetheight = 768
 
- let axisview = UIView(frame: CGRect(x: 0, y: 0, width: 432, height:768))
+ let gridview = UIView(frame: CGRect(x: 0, y: 0, width: sheetwidth, height: sheetheight))
+
+ let axisview = UIView(frame: CGRect(x: 0, y: 0, width: sheetwidth, height: sheetheight))
 
 
  //let xGrid = CGRect(x: 432/46, y: 0, width: 1, height: 768)
 
 //xGrid.bounds = xGrid
 //xGrid.position = view.center
+
+let gridsize = 12
+
 let grid = UIBezierPath()
-for i in 1...46 {
-    grid.append(UIBezierPath(rect: CGRect(x: i*432/46, y: 0, width: 1, height: 768)))
+
+let countwidth = sheetwidth/gridsize
+
+let countheight = sheetheight/gridsize
+
+for i in 1...countwidth {
+    grid.append(UIBezierPath(rect: CGRect(x: i*sheetwidth/countwidth, y: 0, width: 1, height: sheetheight)))
 }
 
-for i in 1...85 {
-    grid.append(UIBezierPath(rect: CGRect(x: 0, y: i*9, width: 768, height: 1)))
+for i in 1...countheight {
+    grid.append(UIBezierPath(rect: CGRect(x: 0, y: i*gridsize, width: sheetwidth, height: 1)))
 }
 
 let xaxis=UIBezierPath(rect: CGRect(x: 23*432/46, y: 0, width: 1, height: 768))
