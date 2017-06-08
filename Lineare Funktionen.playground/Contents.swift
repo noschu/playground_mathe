@@ -6,6 +6,8 @@ public func sharedFunction() -> String {
     return "Hello, world!"
 }
 
+//Playground.LiveViewEdgeToEdge = true
+
 public extension UIView {
     
     func bindFrameToSuperviewBounds() {
@@ -39,7 +41,6 @@ public extension UIView {
 
 //#-hidden-code
 
-
  var arrowLength: CGFloat = 20.0
  
  var transposedFrame = CGRect.zero
@@ -64,8 +65,10 @@ path.move(to: CGPoint(x:0 , y:100))
 path.addLine(to: point3)
 path.lineWidth = 2*/
 
-let sheetwidth = 432
-let sheetheight = 768
+Int(UIScreen.main.bounds.width)
+
+let sheetwidth = Int(UIScreen.main.bounds.width/2)
+let sheetheight = Int(UIScreen.main.bounds.height)
 
  let gridview = UIView(frame: CGRect(x: 0, y: 0, width: sheetwidth, height: sheetheight))
 
@@ -110,14 +113,25 @@ for i in 1...countheight {
 
 func xachse () -> UIView {
 
-let bezierPathX = UIBezierPath()
-bezierPathX.move(to: CGPoint(x: 0, y: sheetheight/2))
-bezierPathX.addLine(to: CGPoint(x: sheetwidth, y: sheetheight/2))
-bezierPathX.lineWidth = 2
+let axis = UIBezierPath()
+    
+let xaxis = UIBezierPath()
+let yaxis = UIBezierPath()
+    
+xaxis.move(to: CGPoint(x: 0, y: sheetheight/2))
+xaxis.addLine(to: CGPoint(x: sheetwidth, y: sheetheight/2))
+
+yaxis.move(to: CGPoint(x: sheetwidth/2, y: 0))
+yaxis.addLine(to: CGPoint(x: sheetwidth/2, y: sheetheight))
+    
+//xaxis.lineWidth = 2
 //bezierPathX.stroke()
+ 
+axis.append(xaxis)
+axis.append(yaxis)
     
     let shapeLayer = CAShapeLayer()
-    shapeLayer.path = bezierPathX.cgPath
+    shapeLayer.path = axis.cgPath
     shapeLayer.strokeColor = UIColor.black.cgColor
     //shapeLayer.fillColor = UIColor.white.cgColor
     //shapeLayer.fillRule = kCAFillRuleEvenOdd
@@ -127,6 +141,8 @@ bezierPathX.lineWidth = 2
     return axisview
 
 }
+
+
 
 //drawLine(p1: CGPoint(x:0, y:0), p2: CGPoint(x:0, y:100))
 
@@ -149,8 +165,8 @@ class ViewController: UIViewController {
         view.addSubview(gridview)
         view.addSubview(axisview)
         
-        UIScreen.main.bounds.width
-        UIScreen.main.bounds.height
+        UIScreen.main.bounds.width/2
+        UIScreen.main.bounds.height/2
         
         self.view = view
         view.frame

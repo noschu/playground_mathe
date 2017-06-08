@@ -6,6 +6,8 @@ public func sharedFunction() -> String {
     return "Hello, world!"
 }
 
+//Playground.LiveViewEdgeToEdge = true
+
 public extension UIView {
     
     func bindFrameToSuperviewBounds() {

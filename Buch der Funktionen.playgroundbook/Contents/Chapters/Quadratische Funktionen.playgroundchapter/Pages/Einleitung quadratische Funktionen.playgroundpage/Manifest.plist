@@ -5,7 +5,7 @@
 	<key>ContentVersion</key>
 	<string>1.0</string>
 	<key>LiveViewEdgeToEdge</key>
-	<false/>
+	<true/>
 	<key>LiveViewMode</key>
 	<string>VisibleByDefault</string>
 	<key>Name</key>
