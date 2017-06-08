@@ -72,11 +72,15 @@ let sheetheight = 768
  let axisview = UIView(frame: CGRect(x: 0, y: 0, width: sheetwidth, height: sheetheight))
 
 
+
+
+
  //let xGrid = CGRect(x: 432/46, y: 0, width: 1, height: 768)
 
 //xGrid.bounds = xGrid
 //xGrid.position = view.center
 
+func kästchen () -> UIView {
 let gridsize = 12
 
 let grid = UIBezierPath()
@@ -92,29 +96,43 @@ for i in 1...countwidth {
 for i in 1...countheight {
     grid.append(UIBezierPath(rect: CGRect(x: 0, y: i*gridsize, width: sheetwidth, height: 1)))
 }
+    
+    let shapeLayer = CAShapeLayer()
+    shapeLayer.path = grid.cgPath
+    //shapeLayer.fillColor = UIColor.white.cgColor
+    //shapeLayer.fillRule = kCAFillRuleEvenOdd
+    gridview.layer.mask = shapeLayer
+    //gridview
+    
+    return gridview
 
-let xaxis=UIBezierPath(rect: CGRect(x: 23*432/46, y: 0, width: 1, height: 768))
-let yaxis=UIBezierPath(rect: CGRect(x: 23*432/46, y: 0, width: 1, height: 768))
+}
 
+func xachse () -> UIView {
 
+let bezierPathX = UIBezierPath()
+bezierPathX.move(to: CGPoint(x: 0, y: sheetheight/2))
+bezierPathX.addLine(to: CGPoint(x: sheetwidth, y: sheetheight/2))
+bezierPathX.lineWidth = 2
+//bezierPathX.stroke()
+    
+    let shapeLayer = CAShapeLayer()
+    shapeLayer.path = bezierPathX.cgPath
+    shapeLayer.strokeColor = UIColor.black.cgColor
+    //shapeLayer.fillColor = UIColor.white.cgColor
+    //shapeLayer.fillRule = kCAFillRuleEvenOdd
+    axisview.layer.mask = shapeLayer
+    //gridview
+    
+    return axisview
 
-
-
-
-
+}
 
 //drawLine(p1: CGPoint(x:0, y:0), p2: CGPoint(x:0, y:100))
 
  gridview.backgroundColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1)
 
 axisview.backgroundColor = UIColor.black
- 
- let shapeLayer = CAShapeLayer()
- shapeLayer.path = grid.cgPath
- //shapeLayer.fillColor = UIColor.white.cgColor
- //shapeLayer.fillRule = kCAFillRuleEvenOdd
- gridview.layer.mask = shapeLayer
- //gridview
 
 print("This code gets executed but isn't visible in the book.")
 
@@ -125,7 +143,11 @@ class ViewController: UIViewController {
         let view = UIView()
         view.backgroundColor = UIColor.white
         view.frame.width
+        
+        kästchen()
+        xachse()
         view.addSubview(gridview)
+        view.addSubview(axisview)
         
         UIScreen.main.bounds.width
         UIScreen.main.bounds.height
