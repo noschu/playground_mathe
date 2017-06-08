@@ -120,9 +120,17 @@ let yaxis = UIBezierPath()
     
 xaxis.move(to: CGPoint(x: 0, y: sheetheight/2))
 xaxis.addLine(to: CGPoint(x: sheetwidth, y: sheetheight/2))
-
+xaxis.move(to: CGPoint(x: sheetwidth, y: sheetheight/2))
+xaxis.addLine(to: CGPoint(x: sheetwidth-9, y: sheetheight/2-3))
+xaxis.move(to: CGPoint(x: sheetwidth, y: sheetheight/2))
+xaxis.addLine(to: CGPoint(x: sheetwidth-9, y: sheetheight/2+3))
+    
 yaxis.move(to: CGPoint(x: sheetwidth/2, y: 0))
 yaxis.addLine(to: CGPoint(x: sheetwidth/2, y: sheetheight))
+yaxis.move(to: CGPoint(x: sheetwidth/2, y: 0))
+yaxis.addLine(to: CGPoint(x: sheetwidth/2-3, y: 9))
+yaxis.move(to: CGPoint(x: sheetwidth/2, y: 0))
+yaxis.addLine(to: CGPoint(x: sheetwidth/2+3, y: 9))
     
 //xaxis.lineWidth = 2
 //bezierPathX.stroke()
