@@ -6,31 +6,152 @@ public func sharedFunction() -> String {
     return "Hello, world!"
 }
 
-//Playground.LiveViewEdgeToEdge = true
+public let sheetwidth = Int(UIScreen.main.bounds.width/2)
 
-public extension UIView {
+public let sheetheight = Int(UIScreen.main.bounds.height)
+
+public let gridview = UIView(frame: CGRect(x: 0, y: 0, width: sheetwidth, height: sheetheight))
+
+public let axisview = UIView(frame: CGRect(x: 0, y: 0, width: sheetwidth, height: sheetheight))
+
+public class ViewController: UIViewController {
     
-    func bindFrameToSuperviewBounds() {
-        guard let superview = self.superview else {
-            print("Error! `superview` was nil – call `addSubview(view: UIView)` before calling `bindFrameToSuperviewBounds()` to fix this.")
-            return
-        }
+    override public func loadView() {
         
-        self.translatesAutoresizingMaskIntoConstraints = false
-        superview.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[subview]-0-|", options: .directionLeadingToTrailing, metrics: nil, views: ["subview": self]))
-        superview.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[subview]-0-|", options: .directionLeadingToTrailing, metrics: nil, views: ["subview": self]))
+        let view = UIView()
+        view.backgroundColor = UIColor.white
+        view.frame.width
+        
+        UIScreen.main.bounds.width/2
+        UIScreen.main.bounds.height/2
+        
+        view.addSubview(gridview)
+        view.addSubview(axisview)
+        
+        self.view = view
+        //view.frame
     }
+    
+    override public var shouldAutorotate: Bool {
+        return false
+    }
+    
+    override public func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Release any cached data, images, etc that aren't in use.
+    }
+    
+    override public var prefersStatusBarHidden: Bool {
+        return true
+    }
+}
+
+public func kästchenpapier () -> UIView {
+    let gridsize = 12
+    
+    let grid = UIBezierPath()
+    
+    let countwidth = sheetwidth/gridsize
+    
+    let countheight = sheetheight/gridsize
+    
+    for i in 1...countwidth {
+        grid.append(UIBezierPath(rect: CGRect(x: i*sheetwidth/countwidth, y: 0, width: 1, height: sheetheight)))
+    }
+    
+    for i in 1...countheight {
+        grid.append(UIBezierPath(rect: CGRect(x: 0, y: i*gridsize, width: sheetwidth, height: 1)))
+    }
+    
+    let shapeLayer = CAShapeLayer()
+    shapeLayer.path = grid.cgPath
+    //shapeLayer.fillColor = UIColor.white.cgColor
+    //shapeLayer.fillRule = kCAFillRuleEvenOdd
+    gridview.layer.mask = shapeLayer
+    //gridview
+    gridview.backgroundColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1)
+    
+    return gridview
     
 }
 
+public func zeichneachse () -> UIView {
+    
+    let axis = UIBezierPath()
+    
+    let xaxis = UIBezierPath()
+    let yaxis = UIBezierPath()
+    
+    xaxis.move(to: CGPoint(x: 0, y: sheetheight/2))
+    xaxis.addLine(to: CGPoint(x: sheetwidth, y: sheetheight/2))
+    xaxis.move(to: CGPoint(x: sheetwidth, y: sheetheight/2))
+    xaxis.addLine(to: CGPoint(x: sheetwidth-9, y: sheetheight/2-3))
+    xaxis.move(to: CGPoint(x: sheetwidth, y: sheetheight/2))
+    xaxis.addLine(to: CGPoint(x: sheetwidth-9, y: sheetheight/2+3))
+    
+    yaxis.move(to: CGPoint(x: sheetwidth/2, y: 0))
+    yaxis.addLine(to: CGPoint(x: sheetwidth/2, y: sheetheight))
+    yaxis.move(to: CGPoint(x: sheetwidth/2, y: 0))
+    yaxis.addLine(to: CGPoint(x: sheetwidth/2-3, y: 9))
+    yaxis.move(to: CGPoint(x: sheetwidth/2, y: 0))
+    yaxis.addLine(to: CGPoint(x: sheetwidth/2+3, y: 9))
+    
+    axis.append(xaxis)
+    axis.append(yaxis)
+    
+    let shapeLayer = CAShapeLayer()
+    shapeLayer.path = axis.cgPath
+    shapeLayer.strokeColor = UIColor.black.cgColor
+    //shapeLayer.fillColor = UIColor.white.cgColor
+    //shapeLayer.fillRule = kCAFillRuleEvenOdd
+    axisview.layer.mask = shapeLayer
+    //axisview
+    axisview.backgroundColor = UIColor.black
+    
+    return axisview
+    
+}
 
-
+public func _setup() {
+    
+    let view = ViewController()
+    PlaygroundPage.current.liveView = view
+}
 
 //// Einleitung Playground
-//: In diesem Playground werden lineare und quadratische Funktionen, insbesondere deren Verschiebung besprochen. Dabei nutzen wir die Möglichkeit die mathematischen Begriffe auch im Kontext von gängien Programmiersprachen zu beschreiben.
+
+//: In diesem Playground werden lineare und quadratische Funktionen, insbesondere deren Verschiebung besprochen. Dabei nutzen wir die Möglichkeit die mathematischen Begriffe auch im Kontext von gängigen Programmiersprachen zu beschreiben. AUf der nächsten Seite geht es weiter.
+
+//// Die Grundlage
+
+//#-hidden-code
+
+_setup()
+
+//#-end-hidden-code
+
+//: Um eine Arbeitsgrundlage zu haben, benötigen wir wie immer im Mathematikunterricht Kästchenpapier. Du kannst es mit dem Befehl kästchenpapier() erzeugen. Versuche es mal!
+
+//#-editable-code Hier kannst Du deinen Code eingeben.
+//#-end-editable-code
+//#-code-completion(everything, hide)
+//#-code-completion(identifier, show, kästchenpapier())
 
 //// Koordinatensystem
-//: Zunächst brauchen wir ein Koordinatensystem. Normalerweise zeichnen wir dieses als erstes in unser Heft. Diesmal wollen wir das iPad diese Aufgabe zuweisen. Mit den Befehl ... kannst Du die x-Achse zeichnen. Wie könnte der Befehl für die y-Achse lauten? Probier es mal aus!
+
+//#-hidden-code
+
+_setup()
+
+//#-end-hidden-code
+
+//: Dann brauchen wir ein Koordinatensystem. Normalerweise zeichnen wir dieses als erstes in unser Heft. Diesmal wollen wir das iPad diese Aufgabe zuweisen. Mit den Befehl ... kannst Du die x-Achse zeichnen. Wie könnte der Befehl für die y-Achse lauten?
+
+//#-editable-code Hier kannst Du deinen Code eingeben.
+//#-end-editable-code
+//#-code-completion(everything, hide)
+//#-code-completion(identifier, show, kästchenpapier(), zeichneachse())
+
 //// Gleichung einer linearen Funktion
 //: Nun haben wir ein Koordinatensystem. Aus dem Unterricht sollte schon bekannt sein, dass lineare Funktionen die Struktur y = m* x + n haben. Doch was heißt das eigentlich? Die Buchstaben x und y sind Variablen und so wollen wir sie auch behandeln. Wohingegen m und n feste Zahlen, sog. Konstanten, sind.
 //// Steigung und y-Achsenabschnitt
@@ -41,151 +162,7 @@ public extension UIView {
 
 //#-hidden-code
 
- var arrowLength: CGFloat = 20.0
- 
- var transposedFrame = CGRect.zero
- 
- // We need 7 points for our Bezier path
- let midX = transposedFrame.midX
- let midY = transposedFrame.midY
- let point1 = CGPoint(x: 0, y: 0)
- let point2 = CGPoint(x: 200, y: 0)
- let point3 = CGPoint(x: 432, y: 628)
- 
- //var breite = size.width
- 
- // Build our Bezier path
-
- /*let path = UIBezierPath()
- path.move(to: point1)
- path.addLine(to: point2)
- path.addLine(to: point3)
-
-path.move(to: CGPoint(x:0 , y:100))
-path.addLine(to: point3)
-path.lineWidth = 2*/
-
-Int(UIScreen.main.bounds.width)
-
-let sheetwidth = Int(UIScreen.main.bounds.width/2)
-let sheetheight = Int(UIScreen.main.bounds.height)
-
- let gridview = UIView(frame: CGRect(x: 0, y: 0, width: sheetwidth, height: sheetheight))
-
- let axisview = UIView(frame: CGRect(x: 0, y: 0, width: sheetwidth, height: sheetheight))
-
-
-
-
-
- //let xGrid = CGRect(x: 432/46, y: 0, width: 1, height: 768)
-
-//xGrid.bounds = xGrid
-//xGrid.position = view.center
-
-func kästchen () -> UIView {
-let gridsize = 12
-
-let grid = UIBezierPath()
-
-let countwidth = sheetwidth/gridsize
-
-let countheight = sheetheight/gridsize
-
-for i in 1...countwidth {
-    grid.append(UIBezierPath(rect: CGRect(x: i*sheetwidth/countwidth, y: 0, width: 1, height: sheetheight)))
-}
-
-for i in 1...countheight {
-    grid.append(UIBezierPath(rect: CGRect(x: 0, y: i*gridsize, width: sheetwidth, height: 1)))
-}
-    
-    let shapeLayer = CAShapeLayer()
-    shapeLayer.path = grid.cgPath
-    //shapeLayer.fillColor = UIColor.white.cgColor
-    //shapeLayer.fillRule = kCAFillRuleEvenOdd
-    gridview.layer.mask = shapeLayer
-    //gridview
-    
-    return gridview
-
-}
-
-func xachse () -> UIView {
-
-let axis = UIBezierPath()
-    
-let xaxis = UIBezierPath()
-let yaxis = UIBezierPath()
-    
-xaxis.move(to: CGPoint(x: 0, y: sheetheight/2))
-xaxis.addLine(to: CGPoint(x: sheetwidth, y: sheetheight/2))
-xaxis.move(to: CGPoint(x: sheetwidth, y: sheetheight/2))
-xaxis.addLine(to: CGPoint(x: sheetwidth-9, y: sheetheight/2-3))
-xaxis.move(to: CGPoint(x: sheetwidth, y: sheetheight/2))
-xaxis.addLine(to: CGPoint(x: sheetwidth-9, y: sheetheight/2+3))
-    
-yaxis.move(to: CGPoint(x: sheetwidth/2, y: 0))
-yaxis.addLine(to: CGPoint(x: sheetwidth/2, y: sheetheight))
-yaxis.move(to: CGPoint(x: sheetwidth/2, y: 0))
-yaxis.addLine(to: CGPoint(x: sheetwidth/2-3, y: 9))
-yaxis.move(to: CGPoint(x: sheetwidth/2, y: 0))
-yaxis.addLine(to: CGPoint(x: sheetwidth/2+3, y: 9))
-    
-//xaxis.lineWidth = 2
-//bezierPathX.stroke()
- 
-axis.append(xaxis)
-axis.append(yaxis)
-    
-    let shapeLayer = CAShapeLayer()
-    shapeLayer.path = axis.cgPath
-    shapeLayer.strokeColor = UIColor.black.cgColor
-    //shapeLayer.fillColor = UIColor.white.cgColor
-    //shapeLayer.fillRule = kCAFillRuleEvenOdd
-    axisview.layer.mask = shapeLayer
-    //gridview
-    
-    return axisview
-
-}
-
-
-
-//drawLine(p1: CGPoint(x:0, y:0), p2: CGPoint(x:0, y:100))
-
- gridview.backgroundColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1)
-
-axisview.backgroundColor = UIColor.black
-
 print("This code gets executed but isn't visible in the book.")
 
-class ViewController: UIViewController {
-    
-    override func loadView() {
-        
-        let view = UIView()
-        view.backgroundColor = UIColor.white
-        view.frame.width
-        
-        kästchen()
-        xachse()
-        view.addSubview(gridview)
-        view.addSubview(axisview)
-        
-        UIScreen.main.bounds.width/2
-        UIScreen.main.bounds.height/2
-        
-        self.view = view
-        view.frame
-    }
-}
-
-PlaygroundPage.current.liveView = ViewController()
-
-/*func /*#-editable-code*/ <#funcName#> /*#-end-editable-code*/() {
-    print("The user will be prompted to edit <#funcName#>")
-    print("This yields a compiler warning in Xcode")
-}*/
 
 //#-end-hidden-code
