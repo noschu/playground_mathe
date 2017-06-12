@@ -56,7 +56,7 @@ let countwidth = sheetwidth/gridsize
 let countheight = sheetheight/gridsize
 
 public func kästchenpapier () -> UIView {
-    let gridsize = 12
+    //let gridsize = 12
     
     let grid = UIBezierPath()
     
@@ -98,8 +98,8 @@ public func zeichneachse () -> UIView {
     xaxis.addLine(to: CGPoint(x: sheetwidth-9, y: sheetheight/2+3))
     
     for i in 1...countwidth/2 {
-        xaxis.move(to: CGPoint(x: i*gridsize*2, y: sheetheight/2-3))
-        xaxis.addLine(to: CGPoint(x: i*gridsize*2, y: sheetheight/2+3))
+        xaxis.move(to: CGPoint(x: i*gridsize*2-gridsize, y: sheetheight/2-3))
+        xaxis.addLine(to: CGPoint(x: i*gridsize*2-gridsize, y: sheetheight/2+3))
     }
     
     yaxis.move(to: CGPoint(x: xmid, y: 0))
@@ -136,10 +136,13 @@ public func lineareFunktion (steigung: Int, yAchsenabschnitt: Int) -> UIView {
     
     let funktionpath = UIBezierPath()
     
-    let trafoyachsenabschnitt = (sheetheight/2-gridsize*2*yAchsenabschnitt)
+    let nsheetwidth = countwidth*gridsize
+    let nsheetheight = countheight*gridsize
     
-    funktionpath.move(to: CGPoint(x: 0, y:sheetwidth/2*steigung+trafoyachsenabschnitt))
-    funktionpath.addLine(to: CGPoint(x:sheetwidth, y:-sheetwidth/2*steigung+trafoyachsenabschnitt))
+    let trafoyachsenabschnitt = (nsheetheight/2-gridsize*2*yAchsenabschnitt)
+    
+    funktionpath.move(to: CGPoint(x: 0, y:nsheetwidth/2*steigung+trafoyachsenabschnitt))
+    funktionpath.addLine(to: CGPoint(x:nsheetwidth, y:-nsheetwidth/2*steigung+trafoyachsenabschnitt))
     
     let shapeLayer = CAShapeLayer()
     shapeLayer.path = funktionpath.cgPath

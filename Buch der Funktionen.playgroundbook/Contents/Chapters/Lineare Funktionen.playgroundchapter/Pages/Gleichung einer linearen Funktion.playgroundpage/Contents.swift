@@ -11,4 +11,4 @@ _setup()
 //#-editable-code Hier kannst Du deinen Code eingeben.
 //#-end-editable-code
 //#-code-completion(everything, hide)
-//#-code-completion(identifier, show, kästchenpapier(), zeichneachse(), lineareFunktion(steigung: , yAchsenabschnitt: ))
+//#-code-completion(identifier, show, kästchenpapier(), zeichneachse(), lineareFunktion())
