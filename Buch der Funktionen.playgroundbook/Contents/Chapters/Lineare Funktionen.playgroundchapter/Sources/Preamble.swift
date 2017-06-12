@@ -61,7 +61,7 @@ public func kästchenpapier () -> UIView {
     let grid = UIBezierPath()
     
     for i in 1...countwidth {
-        grid.append(UIBezierPath(rect: CGRect(x: i*sheetwidth/countwidth, y: 0, width: 1, height: sheetheight)))
+        grid.append(UIBezierPath(rect: CGRect(x: i*gridsize, y: 0, width: 1, height: sheetheight)))
     }
     
     for i in 1...countheight {
@@ -87,6 +87,9 @@ public func zeichneachse () -> UIView {
     let xaxis = UIBezierPath()
     let yaxis = UIBezierPath()
     
+    let xmid = countwidth/2*gridsize
+    let ymid = countheight/2*gridsize
+    
     xaxis.move(to: CGPoint(x: 0, y: sheetheight/2))
     xaxis.addLine(to: CGPoint(x: sheetwidth, y: sheetheight/2))
     xaxis.move(to: CGPoint(x: sheetwidth, y: sheetheight/2))
@@ -95,20 +98,20 @@ public func zeichneachse () -> UIView {
     xaxis.addLine(to: CGPoint(x: sheetwidth-9, y: sheetheight/2+3))
     
     for i in 1...countwidth/2 {
-        xaxis.move(to: CGPoint(x: (i-1)*gridsize*2+i, y: sheetheight/2-3))
-        xaxis.addLine(to: CGPoint(x: (i-1)*gridsize*2+i, y: sheetheight/2+3))
+        xaxis.move(to: CGPoint(x: i*gridsize*2, y: sheetheight/2-3))
+        xaxis.addLine(to: CGPoint(x: i*gridsize*2, y: sheetheight/2+3))
     }
     
-    yaxis.move(to: CGPoint(x: sheetwidth/2, y: 0))
-    yaxis.addLine(to: CGPoint(x: sheetwidth/2, y: sheetheight))
-    yaxis.move(to: CGPoint(x: sheetwidth/2, y: 0))
-    yaxis.addLine(to: CGPoint(x: sheetwidth/2-3, y: 9))
-    yaxis.move(to: CGPoint(x: sheetwidth/2, y: 0))
-    yaxis.addLine(to: CGPoint(x: sheetwidth/2+3, y: 9))
+    yaxis.move(to: CGPoint(x: xmid, y: 0))
+    yaxis.addLine(to: CGPoint(x: xmid, y: sheetheight))
+    yaxis.move(to: CGPoint(x: xmid, y: 0))
+    yaxis.addLine(to: CGPoint(x: xmid-3, y: 9))
+    yaxis.move(to: CGPoint(x: xmid, y: 0))
+    yaxis.addLine(to: CGPoint(x: xmid+3, y: 9))
     
-    for i in 1...countheight/2 {
-        yaxis.move(to: CGPoint(x: (sheetwidth/2-3), y: (i-1)*gridsize*2))
-        yaxis.addLine(to: CGPoint(x: (sheetwidth/2+3), y: (i-1)*gridsize*2))
+    for i in 2...countheight/2 {
+        yaxis.move(to: CGPoint(x: xmid-3, y: (i-1)*gridsize*2))
+        yaxis.addLine(to: CGPoint(x: xmid+3, y: (i-1)*gridsize*2))
     }
     
     axis.append(xaxis)
