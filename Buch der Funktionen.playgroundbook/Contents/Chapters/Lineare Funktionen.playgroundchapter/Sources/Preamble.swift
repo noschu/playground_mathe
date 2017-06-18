@@ -49,7 +49,7 @@ public class ViewController: UIViewController {
     }
 }
 
-let gridsize = 12
+var gridsize = 12
 
 let countwidth = sheetwidth/gridsize
 
@@ -80,6 +80,20 @@ public func kästchenpapier () -> UIView {
     
 }
 
+public func zeichne(achse: String) -> UIView {
+
+    if achse == "x" {
+        print("x-Achse")
+    }
+    
+    if achse == "y" {
+        print("y-Achse")
+    }
+    
+    return axisview
+
+}
+
 public func zeichneachse () -> UIView {
     
     let axis = UIBezierPath()
@@ -88,7 +102,7 @@ public func zeichneachse () -> UIView {
     let yaxis = UIBezierPath()
     
     let xmid = countwidth/2*gridsize
-    let ymid = countheight/2*gridsize
+    _ = countheight/2*gridsize
     
     xaxis.move(to: CGPoint(x: 0, y: sheetheight/2))
     xaxis.addLine(to: CGPoint(x: sheetwidth, y: sheetheight/2))
